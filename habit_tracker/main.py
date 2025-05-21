@@ -37,12 +37,26 @@ headers ={
 
 pixel_endpoint = f"{graph_endpoint}/{GRAPH_ID}"
 
-today = datetime(year=2025, month=5, day=20)
+today = datetime.now()
+today_date = today.strftime("%Y%m%d")
 
 pixel_params = {
-    "date": today.strftime("%Y%m%d"),
-    "quantity": "20",
+    "date": today_date,
+    "quantity": input("How many kilometers did you run today?"),
 }
 
-# response = requests.post(url=pixel_endpoint, headers=headers, json=pixel_params)
+response = requests.post(url=pixel_endpoint, headers=headers, json=pixel_params)
+print(response.text)
+
+update_endpoint = f"{pixel_endpoint}/{today_date}"
+
+update_params = {
+    "quantity": "5",
+}
+# response = requests.put(url=update_endpoint, headers=headers, json=update_params)
 # print(response.text)
+
+# response = requests.delete(url=update_endpoint, headers=headers)
+# print(response.text)
+
+

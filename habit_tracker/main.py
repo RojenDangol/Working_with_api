@@ -1,6 +1,6 @@
 import requests
 from datetime import datetime
-
+import os
 
 pixela_endpoint = "https://pixe.la/v1/users"
 USERNAME = "rojen123"

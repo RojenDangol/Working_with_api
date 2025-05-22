@@ -51,7 +51,7 @@ print(response.text)
 update_endpoint = f"{pixel_endpoint}/{today_date}"
 
 update_params = {
-    "quantity": "5",
+    "quantity": "15",
 }
 # response = requests.put(url=update_endpoint, headers=headers, json=update_params)
 # print(response.text)

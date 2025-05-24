@@ -33,11 +33,18 @@ for destination in sheet_data:
     )
 
     if flight is not None and float(flight.price) > 0:
+        users = data_manager.get_customer_emails()
+        emails = [row["email"] for row in users]
+        names = [row["firstName"] for row in users]
+
         if float(flight.price) < float(destination["lowestPrice"]):
-            notification_manager.send_msg(
-                message=f"Low price alert! Only £{flight.price} to fly from {flight.origin_city}-"
-                        f"{flight.origin_airport} to {flight.destination_city}-{flight.destination_airport}, "
-                        f"from {flight.out_date} to {flight.return_date}."
-            )
+            # notification_manager.send_msg(
+            #     message=f"Low price alert! Only £{flight.price} to fly from {flight.origin_city}-"
+            #             f"{flight.origin_airport} to {flight.destination_city}-{flight.destination_airport}, "
+            #             f"from {flight.out_date} to {flight.return_date}."
+            # )
+            message = (f"Low price alert! Only £{flight.price} to fly from {flight.origin_city}-{flight.origin_airport} to"
+                     f" {flight.destination_city}-{flight.destination_airport}, from {flight.out_date} to {flight.return_date}.")
+            notification_manager.send_emails(emails, message)
 
 

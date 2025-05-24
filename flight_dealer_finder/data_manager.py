@@ -2,6 +2,7 @@ import requests
 
 SHEETY_ENDPOINTS = "https://api.sheety.co/914e5a5a7d2cfc66eaae6dbbe361726f/flightDeals/prices"
 GOOGLE_SHEET_NAME = "price"
+USER_ENDPOINTS = "https://api.sheety.co/914e5a5a7d2cfc66eaae6dbbe361726f/flightDeals/users"
 
 class DataManager:
 
@@ -27,3 +28,10 @@ class DataManager:
             sheety_response = requests.put(f"{SHEETY_ENDPOINTS}/{city_id}", json=sheet_param)
 
             print(sheety_response.text)
+
+    def get_customer_emails(self):
+        response = requests.get(USER_ENDPOINTS)
+        response.raise_for_status()
+        data = response.json()
+        self.customer_data = data["users"]
+        return self.customer_data
